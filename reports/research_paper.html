@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Research Paper</title>
+<style>
+    @page {
+        size: A4;
+        margin: 18mm 15mm 18mm 15mm;
+    }
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 10pt;
+        line-height: 1.25;
+        color: #111;
+        margin: 0;
+        padding: 0;
+    }
+    .title-block {
+        text-align: center;
+        margin-bottom: 18px;
+    }
+    h1.paper-title {
+        font-size: 16pt;
+        font-weight: bold;
+        margin-bottom: 8pt;
+        line-height: 1.2;
+    }
+    .author-block {
+        font-size: 9.5pt;
+        margin-bottom: 12pt;
+        color: #222;
+        line-height: 1.3;
+    }
+    .abstract-box {
+        margin: 0 10mm 14pt 10mm;
+        padding: 4pt 0;
+        border-top: 0.5pt solid #888;
+        border-bottom: 0.5pt solid #888;
+    }
+    .abstract-box p {
+        font-size: 9pt;
+        line-height: 1.3;
+        margin: 4pt 0;
+        text-align: justify;
+    }
+    .abstract-title {
+        font-weight: bold;
+        font-style: italic;
+    }
+    .two-column {
+        column-count: 2;
+        column-gap: 7mm;
+        text-align: justify;
+    }
+    h2 {
+        font-size: 10.5pt;
+        text-transform: uppercase;
+        text-align: center;
+        border-bottom: 0.5pt solid #666;
+        margin-top: 12pt;
+        margin-bottom: 6pt;
+        font-weight: bold;
+        break-after: avoid;
+    }
+    h3 {
+        font-size: 9.5pt;
+        font-style: italic;
+        margin-top: 8pt;
+        margin-bottom: 3pt;
+        font-weight: bold;
+        break-after: avoid;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 5pt;
+        text-indent: 1.2em;
+    }
+    p.no-indent {
+        text-indent: 0;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8pt 0;
+        font-size: 7.5pt;
+        line-height: 1.15;
+        break-inside: avoid;
+    }
+    th, td {
+        border-top: 0.5pt solid #444;
+        border-bottom: 0.5pt solid #444;
+        padding: 3pt 3pt;
+        text-align: left;
+    }
+    th {
+        font-weight: bold;
+        background: #f4f4f4;
+    }
+    .ref-item {
+        font-size: 8pt;
+        margin-bottom: 4pt;
+        text-indent: -1.5em;
+        margin-left: 1.5em;
+        line-height: 1.2;
+    }
+    </style>
+</head>
+<body>
+<div class='title-block'>
+<h1 class='paper-title'>Retrospective Customer Churn Risk Classification: A Leakage-Safe Statistical Audit and Comparative Benchmark on Cross-Sectional European Banking Data</h1>
+<div class='author-block'>**[Author Name Placeholder]**<br>Department of [Department Placeholder], [Institution / University Placeholder]<br>[Program / Laboratory Placeholder], [City, Country Placeholder]<br>Email: [author.email@placeholder.edu]<br></div>
+</div>
+<div class='abstract-box'>
+<p><span class='abstract-title'>Abstract—</span>This study conducts an audited, leakage-safe empirical investigation of customer churn prediction using an educational cross-sectional dataset of 10,000 retail banking accounts across three European geographies (France, Germany, and Spain). We formulate four core research questions addressing multiple-comparison-corrected segment disparities, leak-free supervised model selection, operational threshold trade-offs, and the boundaries of feature attribution. Non-parametric hypothesis tests with Benjamini-Hochberg False Discovery Rate (FDR) control at <em>q = 0.05</em> confirm that observed churn disparities across all four analyzed dimensions—Geography (<em>\chi^2 = 301.26</em>), Age Band (<em>\chi^2 = 1206.70</em>), Product Count (<em>\chi^2 = 1503.63</em>), and Active Membership (<em>\chi^2 = 242.99</em>)—survive correction with adjusted <em>p < 10^{-54}</em>. Specifically, customers in the 46–59 age band exhibit an observed churn rate of <strong>51.10%</strong> (1,000-resample bootstrap 95% CI: [48.77%, 53.63%]), representing a <strong>2.51x</strong> elevation over the portfolio baseline rate of <strong>20.37%</strong> (95% CI: [19.64%, 21.18%]). Under a leak-free 5-fold cross-validation protocol using mean Average Precision (AP), a Histogram-based Gradient Boosting Classifier decisively outperformed regularized Logistic Regression by +0.0737 AP (0.6905 vs. 0.6168), exceeding a pre-registered 0.01 AP margin favoring parsimony. On an untouched held-out test partition (<em>N = 2,000</em>), the winning model achieved an AP of <strong>0.6980</strong> (95% CI: [0.6512, 0.7394]) and an ROC-AUC of <strong>0.8578</strong> (95% CI: [0.8360, 0.8799]). Evaluating operating thresholds reveals that the default 0.50 cutoff catches 193/407 churners (47.42% recall, missing 52.58%) with 71 false alarms (73.11% precision), whereas a cross-validation-tuned 0.27 threshold catches 281/407 churners (69.04% recall, missing 30.96%) with 213 false alarms (56.88% precision). We emphasize that all reported associations and feature attributions reflect statistical model reliance in static cross-sectional data, not physical mechanisms or causal claims.</p>
+<p class='no-indent'><span class='abstract-title'>Index Terms—</span>Customer churn prediction, statistical audit, data leakage prevention, Benjamini-Hochberg FDR, bootstrap confidence intervals, precision-recall trade-off, SHAP attribution, gradient boosting.</p>
+</div>
+<div class='two-column'>
+<h2>I. Introduction</h2>
+<p>Customer attrition poses a continuous challenge to retail banking institutions, directly undermining net customer acquisition economics and multi-year customer lifetime value (LTV) [1]. In response, banking analytics teams frequently deploy supervised machine learning models to identify accounts exhibiting elevated risk of departure. However, the translation of academic churn modeling into reliable operational decision-making is fraught with methodological challenges. Three systemic vulnerabilities recur throughout the applied predictive literature:</p>
+<p>1. <em>Cohort over-interpretation without multiple-testing control:</em> Subgroup analysis frequently highlights extreme churn rates in exploratory segments without adjusting for simultaneous inference or reporting estimation uncertainty, mistaking sample variance for durable patterns.</p>
+<p>2. <em>Methodological and data leakage:</em> Inappropriate preprocessing—such as fitting feature transformers across entire datasets prior to train-test partitioning—artificially inflates diagnostic metrics, producing optimistically biased evaluations that degrade precipitously in deployment [2], [3].</p>
+<p>3. <em>Conflation of predictive attribution with causal mechanisms:</em> Interpretability tools like SHAP or permutation importance are often mistakenly treated as actionable causal levers, encouraging unverified business interventions on features that are merely correlated with attrition [4].</p>
+<p>To address these vulnerabilities, this paper presents a leakage-safe statistical audit and benchmark evaluation conducted on `European_Bank.csv`, a cross-sectional dataset of 10,000 banking customers. We establish a pre-registered feature policy, apply Benjamini-Hochberg False Discovery Rate (FDR) corrections [5] across cohort tests, derive 1,000-resample non-parametric bootstrap confidence intervals [6], and compare candidate model architectures under training-only cross-validation. Furthermore, we explicitly evaluate operating threshold trade-offs rather than defaulting to arbitrary cutoffs.</p>
+<p>To maintain empirical rigor, our investigation is structured around four pre-registered Research Questions (RQs), summarized in Table I.</p>
+<h3>TABLE I: Research Questions and Methodological Focus</h3>
+<table><thead><tr><th>Research Question</th><th>Analytical Scope</th><th>Statistical Methodology</th></tr></thead><tbody><tr><td><strong>RQ1: Cohort Disparities</strong></td><td>Do observed segment-level churn differences survive correction for multiple comparisons?</td><td>Contingency tables, Pearson $\chi^2$ test of independence, Cramér's $V$ effect size, Benjamini-Hochberg FDR control ($q=0.05$), and 1,000-resample bootstrap 95% CIs.</td></tr><tr><td><strong>RQ2: Predictive Validity</strong></td><td>Can the available features predict churn meaningfully better than a majority baseline under leakage-safe validation?</td><td>Stratified 80/20 train/test split, 5-fold cross-validated Average Precision (AP), ROC-AUC, pre-registered tie-breaker rule (+0.01 AP margin), and pipeline encapsulation.</td></tr><tr><td><strong>RQ3: Operational Trade-offs</strong></td><td>What precision/recall tradeoff does the selected model's threshold choice impose, and how should that tradeoff be communicated?</td><td>Confusion matrix decomposition at default (0.50) vs. CV-tuned (0.27) thresholds, quantifying caught churners, false alarms, and missed attrition.</td></tr><tr><td><strong>RQ4: Attribution Boundaries</strong></td><td>What does feature attribution reveal, and what are the limits of treating it as evidence?</td><td>TreeExplainer SHAP attribution ($N=1,000$) and held-out test permutation importance ($B=10$), accompanied by formal non-causal boundary delineation.</td></tr></tbody></table>
+<h2>II. Related Work</h2>
+<h3>A. Machine Learning in Customer Attrition</h3>
+<p>Supervised churn classification in financial services has historically evolved from parametric linear models, such as logistic regression and linear discriminant analysis, toward non-linear tree ensembles, including Random Forests, XGBoost, and LightGBM [1], [7]. While non-linear ensembles consistently demonstrate superior discriminatory ranking, class imbalance (typically 15%–25% positive prevalence) renders standard classification accuracy uninformative. Modern consensus mandates the adoption of threshold-agnostic, ranking-sensitive metrics, specifically Average Precision (the area under the precision-recall curve) and the Receiver Operating Characteristic Area Under the Curve (ROC-AUC) [8].</p>
+<h3>B. Data Leakage and Reproducibility Failures</h3>
+<p>Data leakage occurs when information from outside the training partition influences model training, feature selection, or hyperparameter optimization. Kaufman et al. [2] formalized the taxonomy of data leakage in data mining, distinguishing between target leakage (direct or indirect inclusion of target proxies in feature matrices) and train-test contamination. Recently, Kapoor and Narayanan [3] conducted a systematic survey across 17 fields, demonstrating that data leakage represents a primary driver of the reproducibility crisis in machine-learning-based science, affecting hundreds of published studies. In banking churn settings, common leakage vectors include global scaling across partitions, target-correlated ID variables, and refitting models on combined datasets. Ensuring strict pipeline encapsulation where all transformers are fitted exclusively on training folds is essential for valid empirical claims [9].</p>
+<h3>C. Multiple Hypothesis Testing in Segment Audits</h3>
+<p>Exploratory subgroup segmentation often involves testing numerous candidate customer cohorts against attrition. When conducting multiple significance tests simultaneously, the family-wise error rate escalates, yielding spurious statistical discoveries. Benjamini and Hochberg [5] introduced the False Discovery Rate (FDR) controlling procedure, which guarantees that the expected proportion of false rejections among all rejected null hypotheses remains below a predefined threshold <em>q</em>. Integrating Benjamini-Hochberg FDR corrections into cohort audits ensures that reported segment disparities reflect robust statistical associations rather than multi-comparison artifacts.</p>
+<h3>D. Model Explainability and Causal Boundaries</h3>
+<p>The advent of Shapley Additive Explanations (SHAP), grounded in cooperative game theory [4], has transformed model interpretability in tabular machine learning. Permutation feature importance [10] provides an orthogonal, model-agnostic measure of how shuffling a feature degrades global loss. However, both methods measure <em>statistical reliance</em> within a specific mathematical functional form; they do not establish that intervening upon a feature will alter the target state in the real world [11]. Methodological honesty requires reporting feature attribution strictly as model introspection rather than causal prescription.</p>
+<h2>III. Methodology and Dataset Audit</h2>
+<h3>A. Dataset Architecture and Provenance</h3>
+<p>The experimental dataset comprises `European_Bank.csv`, containing exactly 10,000 records across 14 tabular fields. The target variable `Exited` denotes whether a customer closed their account:</p>
+<p>- <strong>Retained (<em>y = 0</em>):</strong> 7,963 accounts (79.63%)</p>
+<p>- <strong>Exited (<em>y = 1</em>):</strong> 2,037 accounts (20.37%)</p>
+<p><em>Provenance Disclosure:</em> The file resembles the widely circulated educational `Churn_Modelling` benchmark, but the exact provenance of this specific CSV has not been independently verified. Describe it as an educational customer-churn dataset supplied for this project. Do not present it as actual European Central Bank data or proprietary records from a European bank.</p>
+<p>Data audit procedures (`src/data_validation.py`) confirmed that all 10,000 records contain zero missing values across all columns and zero duplicate `CustomerId` entries. The column `Year` was found to be constant (`2025`) across all 10,000 rows, offering zero statistical variance. Because the dataset contains no repeated longitudinal observations, transaction timestamps, or event-time logs, it represents a static, single-snapshot cross-sectional observation. Temporal methods (e.g., survival hazard modeling, ARIMA forecasting, or Granger causality) are strictly invalid and are excluded from this study.</p>
+<h3>B. Segment Statistical Testing</h3>
+<p>To address RQ1, we audit customer exit patterns across four primary operational dimensions: Geography, Age Band, Number of Products, and Active Membership. For each dimension, we construct contingency tables against `Exited` and compute Pearson's Chi-square test of independence:</p>
+<p><em></em>\chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}<em></em></p>
+<p>where <em>O_{ij}</em> and <em>E_{ij}</em> denote observed and expected cell counts, respectively. To quantify association magnitude independent of sample size, we calculate Cramér's <em>V</em>:</p>
+<p><em></em>V = \sqrt{\frac{\chi^2}{N \cdot \min(r - 1, c - 1)}}<em></em></p>
+<p>where <em>N = 10,000</em>, and <em>r</em> and <em>c</em> represent row and column dimensions.</p>
+<p>To prevent spurious discovery inflation across simultaneous segment evaluations, raw <em>p</em>-values are adjusted using the Benjamini-Hochberg [5] step-up procedure at a false discovery rate of <em>q = 0.05</em>. Ranks <em>i \in \{1, \dots, m\}</em> (here <em>m = 4</em>) are assigned to sorted raw <em>p</em>-values <em>p_{(1)} \le p_{(2)} \le \dots \le p_{(m)}</em>, with adjusted values computed as:</p>
+<p><em></em>p_{(i)}^{\text{adj}} = \min \left( \min_{k \ge i} \left\{ \frac{m}{k} p_{(k)} \right\}, 1 \right)<em></em></p>
+<p>ensuring the monotonicity constraint <em>p_{(i)}^{\text{adj}} \ge p_{(i)}</em>.</p>
+<h3>C. Non-Parametric Bootstrap Confidence Intervals</h3>
+<p>To avoid relying solely on asymptotic normality assumptions, we construct 1,000-resample non-parametric percentile bootstrap confidence intervals [6] using a fixed pseudo-random seed (`random_seed=42`) via `src/statistics.py`. For a sample statistic <em>\hat{\theta}</em>, bootstrap estimates <em>\theta^{<em>(1)}, \dots, \theta^{</em>(B)}</em> (<em>B = 1,000</em>) are generated by sampling with replacement. The two-sided 95% confidence interval is defined by the empirical 2.5th and 97.5th percentiles:</p>
+<p><em></em>\text{CI}_{0.95} = \left[ \theta^{<em>}_{(0.025 \cdot B)}, \; \theta^{</em>}_{(0.975 \cdot B)} \right]<em></em></p>
+<p>We compute bootstrap intervals for four key parameters: (1) portfolio overall churn rate, (2) the 46–59 age band churn rate, (3) final model test Average Precision (AP), and (4) final model test ROC-AUC.</p>
+<h3>D. Feature Governance and Leakage Prevention Policy</h3>
+<p>To eliminate target and entity leakage, candidate features are strictly governed:</p>
+<p>1. `Exited` is designated strictly as target <em>y</em> and is defensively excluded from the feature space <em>X</em>.</p>
+<p>2. `CustomerId` and `Surname` are omitted to prevent high-cardinality entity memorization and privacy infringement.</p>
+<p>3. `Year` is omitted due to zero variance.</p>
+<p>4. The remaining 10 features form candidate matrix <em>X</em>:</p>
+<p>- <em>Continuous / Numeric (5):</em> `CreditScore`, `Age`, `Tenure`, `Balance`, `EstimatedSalary`.</p>
+<p>- <em>Categorical / Discrete (5):</em> `Geography`, `Gender`, `NumOfProducts`, `HasCrCard`, `IsActiveMember`.</p>
+<p><em>Categorical Treatment of Product Holding:</em> Crucially, `NumOfProducts` is encoded as a discrete categorical feature rather than an integer scale. Exploratory inspection reveals that customer churn does not vary monotonically with product holdings; treating it as continuous would impose an invalid linear constraint, obscuring the protective association of dual-product holdings.</p>
+<h3>E. Model Selection and Evaluation Protocol</h3>
+<p>The dataset is partitioned once into an 80% training split (<em>N = 8,000</em>) and a 20% held-out test split (<em>N = 2,000</em>) using stratified sampling on `Exited` (`random_state=42`). The held-out test partition is strictly sequestered and accessed only once for final evaluation.</p>
+<p>Within the training set, model selection is performed using 5-fold `StratifiedKFold(shuffle=True, random_state=42)`. All preprocessing transformations (median imputation, standard scaling for numeric features, and one-hot encoding for categorical features) are encapsulated within independent scikit-learn `Pipeline` and `ColumnTransformer` instances [9], fitted strictly on each fold's training indices.</p>
+<p>Candidate architectures include:</p>
+<p>- `DummyClassifier(strategy="prior")`: Predicts the empirical training base rate (majority baseline).</p>
+<p>- `LogisticRegression(max_iter=2000, random_state=42)`: <em>L_2</em>-regularized linear model with sparse one-hot encoding.</p>
+<p>- `HistGradientBoostingClassifier(random_state=42)`: Non-linear histogram-based gradient-boosted decision tree ensemble with dense encoding.</p>
+<p><em>Explicit Decision Criterion:</em> Model selection is governed primarily by mean cross-validated Average Precision (AP). To balance empirical performance with parsimony and operational simplicity, a pre-registered decision rule was instituted:</p>
+<p><em></em>\text{Select } \text{LogisticRegression} \quad \text{if} \quad \overline{\text{AP}}_{\text{HGB}} - \overline{\text{AP}}_{\text{LogReg}} \le 0.01<em></em></p>
+<p><em></em>\text{Select } \text{HistGradientBoosting} \quad \text{if} \quad \overline{\text{AP}}_{\text{HGB}} - \overline{\text{AP}}_{\text{LogReg}} > 0.01<em></em></p>
+<h2>IV. Empirical Results</h2>
+<h3>A. Segment Statistical Audit (RQ1)</h3>
+<p>Aggregating the 10,000 accounts across the four operational dimensions yields the baseline segment distributions detailed in Table II.</p>
+<h3>TABLE II: Cohort Segmentation and Observed Churn Distributions</h3>
+<table><thead><tr><th>Dimension</th><th>Subgroup</th><th>Total Customers ($n$)</th><th>Retained ($y=0$)</th><th>Exits ($y=1$)</th><th>Observed Churn Rate</th><th>Share of Total Exits</th></tr></thead><tbody><tr><td><strong>Geography</strong></td><td>France</td><td>5,014</td><td>4,204</td><td>810</td><td>16.15%</td><td>39.76%</td></tr><tr><td></td><td>Germany</td><td>2,509</td><td>1,695</td><td>814</td><td><strong>32.44%</strong></td><td>39.96%</td></tr><tr><td></td><td>Spain</td><td>2,477</td><td>2,064</td><td>413</td><td>16.67%</td><td>20.27%</td></tr><tr><td><strong>Age Band</strong></td><td><30</td><td>1,641</td><td>1,517</td><td>124</td><td>7.56%</td><td>6.09%</td></tr><tr><td></td><td>30–45</td><td>6,248</td><td>5,292</td><td>956</td><td>15.30%</td><td>46.93%</td></tr><tr><td></td><td><strong>46–59</strong></td><td><strong>1,585</strong></td><td><strong>775</strong></td><td><strong>810</strong></td><td><strong>51.10%</strong></td><td><strong>39.76%</strong></td></tr><tr><td></td><td>60+</td><td>526</td><td>379</td><td>147</td><td>27.95%</td><td>7.22%</td></tr><tr><td><strong>Product Count</strong></td><td>1</td><td>5,084</td><td>3,675</td><td>1,409</td><td>27.71%</td><td>69.17%</td></tr><tr><td></td><td>2</td><td>4,590</td><td>4,242</td><td>348</td><td><strong>7.58%</strong></td><td>17.08%</td></tr><tr><td></td><td>3 *</td><td>266</td><td>46</td><td>220</td><td>82.71%</td><td>10.80%</td></tr><tr><td></td><td>4 *</td><td>60</td><td>0</td><td>60</td><td>100.00%</td><td>2.95%</td></tr><tr><td><strong>Activity</strong></td><td>Inactive</td><td>4,849</td><td>3,547</td><td>1,302</td><td><strong>26.85%</strong></td><td>63.92%</td></tr><tr><td></td><td>Active</td><td>5,151</td><td>4,416</td><td>735</td><td>14.27%</td><td>36.08%</td></tr><tr><td><strong>Portfolio Total</strong></td><td>Full Sample</td><td>10,000</td><td>7,963</td><td>2,037</td><td><strong>20.37%</strong></td><td>100.00%</td></tr></tbody></table>
+<p><em>\</em> Small sample notice: <em>n < 300</em>. High finite-sample variance warrants caution against unconditional generalization.*</p>
+<p>To formally test whether these observed differences represent statistically significant departures from independence rather than random fluctuations, we execute the Chi-square and FDR procedure defined in Section III-B. Results are saved in `reports/segment_significance_tests.csv` and summarized in Table III.</p>
+<h3>TABLE III: Segment Independence Significance Tests and Multiple Testing Correction</h3>
+<table><thead><tr><th>Dimension</th><th>Chi-Square ($\chi^2$)</th><th>d.o.f.</th><th>Raw $p$-value</th><th>Cramér's $V$</th><th>BH Adj. $p$-value ($q=0.05$)</th><th>Survives FDR?</th></tr></thead><tbody><tr><td><strong>Geography</strong></td><td>301.26</td><td>2</td><td>$3.83 \times 10^{-66}$</td><td>0.1736</td><td>$5.11 \times 10^{-66}$</td><td><strong>Yes (Significant)</strong></td></tr><tr><td><strong>Age Band</strong></td><td>1,206.70</td><td>3</td><td>$2.58 \times 10^{-261}$</td><td>0.3474</td><td>$5.16 \times 10^{-261}$</td><td><strong>Yes (Significant)</strong></td></tr><tr><td><strong>NumOfProducts</strong></td><td>1,503.63</td><td>3</td><td>$< 10^{-300}$</td><td>0.3878</td><td>$< 10^{-300}$</td><td><strong>Yes (Significant)</strong></td></tr><tr><td><strong>IsActiveMember</strong></td><td>242.99</td><td>1</td><td>$8.79 \times 10^{-55}$</td><td>0.1559</td><td>$8.79 \times 10^{-55}$</td><td><strong>Yes (Significant)</strong></td></tr></tbody></table>
+<p>All four segment dimensions survive Benjamini-Hochberg FDR correction at <em>q = 0.05</em> with adjusted <em>p</em>-values orders of magnitude below standard thresholds. Product holdings (<em>V = 0.3878</em>) and Age Band (<em>V = 0.3474</em>) exhibit the largest association magnitudes.</p>
+<p>Applying the 1,000-resample non-parametric bootstrap procedure (`reports/bootstrap_cis.json`) yields:</p>
+<p>- <strong>Portfolio Baseline Churn Rate:</strong> Point estimate = <strong>20.37%</strong>, 95% Bootstrap CI: <strong>[19.64%, 21.18%]</strong>.</p>
+<p>- <strong>Age 46–59 Cohort Churn Rate:</strong> Point estimate = <strong>51.10%</strong>, 95% Bootstrap CI: <strong>[48.77%, 53.63%]</strong>.</p>
+<p>The lower bound of the 46–59 age band interval (48.77%) sits well above twice the upper bound of the portfolio baseline (21.18%), establishing an observed <strong>2.51x</strong> rate ratio that is statistically robust.</p>
+<h3>B. Predictive Model Performance (RQ2, RQ3)</h3>
+<p>The 5-fold cross-validation performance ladder across candidate estimators on the 8,000 training records is documented in Table IV.</p>
+<h3>TABLE IV: 5-Fold Training Cross-Validation Comparison Ladder</h3>
+<table><thead><tr><th>Estimator Pipeline</th><th>Architecture Description</th><th>Mean CV AP ± Std</th><th>Mean CV ROC-AUC ± Std</th><th>Model Selection Status</th></tr></thead><tbody><tr><td>`DummyClassifier(prior)`</td><td>Majority Prevalence Baseline</td><td>0.2037 ± 0.0000</td><td>0.5000 ± 0.0000</td><td>Baseline Reference</td></tr><tr><td>`LogisticRegression`</td><td>Scaled Continuous + One-Hot Linear</td><td>0.6168 ± 0.0181</td><td>0.8314 ± 0.0116</td><td>Candidate</td></tr><tr><td><strong>`HistGradientBoosting`</strong></td><td>Non-Linear Binned Tree Ensemble</td><td><strong>0.6905 ± 0.0270</strong></td><td><strong>0.8566 ± 0.0110</strong></td><td><strong>Selected Winner (+0.0737 AP)</strong></td></tr></tbody></table>
+<p><em>Selection Decision:</em> HistGradientBoosting outperformed Logistic Regression by <strong>+0.0737 AP</strong>, decisively surpassing the pre-registered parsimony margin of 0.01 AP. Consequently, HistGradientBoosting was selected as the final production model.</p>
+<p>The winning pipeline was retrained on the full 8,000-record training split and evaluated once against the sequestered 2,000-record held-out test partition. Evaluation results, accompanied by 1,000-resample bootstrap 95% confidence intervals, are reported in Table V.</p>
+<h3>TABLE V: Held-Out Test Set Diagnostic Performance ($N = 2,000$)</h3>
+<table><thead><tr><th>Evaluation Metric</th><th>Point Estimate</th><th>95% Bootstrap Confidence Interval</th><th>Baseline Reference (Dummy)</th></tr></thead><tbody><tr><td><strong>Average Precision (AP)</strong></td><td><strong>0.6980</strong></td><td><strong>[0.6512, 0.7394]</strong></td><td>0.2035</td></tr><tr><td><strong>ROC-AUC</strong></td><td><strong>0.8578</strong></td><td><strong>[0.8360, 0.8799]</strong></td><td>0.5000</td></tr></tbody></table>
+<p>To address RQ3, we examine the operational consequences of probability decision threshold selection on the test partition (which contains exactly 407 churners and 1,593 retained accounts). Table VI compares the standard default threshold (<em>p \ge 0.50</em>) against the cross-validation-tuned threshold (<em>p \ge 0.27</em>).</p>
+<h3>TABLE VI: Operational Decision Threshold Trade-Off Table ($N = 2,000$)</h3>
+<table><thead><tr><th>Operational Metric</th><th>Default Threshold ($p \ge 0.50$)</th><th>CV-Tuned Alternative ($p \ge 0.27$)</th><th>Net Operational Difference</th></tr></thead><tbody><tr><td><strong>Precision</strong></td><td><strong>73.11%</strong> ($193 / 264$)</td><td><strong>56.88%</strong> ($281 / 494$)</td><td>-16.23%</td></tr><tr><td><strong>Recall</strong></td><td><strong>47.42%</strong> ($193 / 407$)</td><td><strong>69.04%</strong> ($281 / 407$)</td><td>+21.62%</td></tr><tr><td><strong>$F_1$ Score</strong></td><td><strong>0.5753</strong></td><td><strong>0.6238</strong></td><td>+0.0485</td></tr><tr><td><strong>Miss Rate (Uncaught Exits)</strong></td><td><strong>52.58%</strong> ($214 / 407$)</td><td><strong>30.96%</strong> ($126 / 407$)</td><td>-21.62% (88 fewer missed)</td></tr><tr><td><strong>True Positives (Caught Churn)</strong></td><td>193</td><td>281</td><td>+88 accounts caught</td></tr><tr><td><strong>False Negatives (Missed Churn)</strong></td><td>214</td><td>126</td><td>-88 accounts missed</td></tr><tr><td><strong>False Positives (False Alarms)</strong></td><td>71</td><td>213</td><td>+142 unnecessary contacts</td></tr><tr><td><strong>True Negatives (Correct Inaction)</strong></td><td>1,522</td><td>1,380</td><td>-142 undisturbed accounts</td></tr></tbody></table>
+<h3>C. Feature Attribution and Reliance (RQ4)</h3>
+<p>To audit internal model mechanisms, we combine global TreeExplainer SHAP attribution on a representative sample (<em>N=1,000</em>) with 10-repeat permutation importance on the held-out test split (`reports/permutation_importance.csv`).</p>
+<p>SHAP summary analysis indicates:</p>
+<p>1. `Age`: Strong positive attribution. Elevated customer age shifts log-odds predictions positively toward exit, aligning with the 51.10% churn observed in the 46–59 cohort.</p>
+<p>2. `NumOfProducts`: Dual-product holding (`NumOfProducts = 2`) produces substantial negative attributions (protective against churn), whereas single-product holdings and 3+ holdings shift attribution toward exit.</p>
+<p>3. `IsActiveMember`: Active status (`IsActiveMember = 1`) consistently produces negative attributions toward retention.</p>
+<p>Table VII summarizes the model-agnostic test permutation importance rankings.</p>
+<h3>TABLE VII: Test Set Permutation Feature Importance ($B = 10$ Repeats)</h3>
+<table><thead><tr><th>Rank</th><th>Feature Dimension</th><th>Mean AP Degradation</th><th>Std Error</th><th>Attribution Interpretation Notice</th></tr></thead><tbody><tr><td>1</td><td>`NumOfProducts`</td><td><strong>0.2727</strong></td><td>0.0159</td><td>Predictive reliance, not causal importance</td></tr><tr><td>2</td><td>`Age`</td><td><strong>0.2381</strong></td><td>0.0115</td><td>Predictive reliance, not causal importance</td></tr><tr><td>3</td><td>`IsActiveMember`</td><td><strong>0.0949</strong></td><td>0.0083</td><td>Predictive reliance, not causal importance</td></tr><tr><td>4</td><td>`Balance`</td><td><strong>0.0612</strong></td><td>0.0074</td><td>Predictive reliance, not causal importance</td></tr><tr><td>5</td><td>`Geography`</td><td><strong>0.0485</strong></td><td>0.0041</td><td>Predictive reliance, not causal importance</td></tr><tr><td>6</td><td>`Gender`</td><td>0.0081</td><td>0.0028</td><td>Predictive reliance, not causal importance</td></tr><tr><td>7</td><td>`Tenure`</td><td>0.0043</td><td>0.0042</td><td>Predictive reliance, not causal importance</td></tr><tr><td>8</td><td>`CreditScore`</td><td>0.0022</td><td>0.0050</td><td>Predictive reliance, not causal importance</td></tr><tr><td>9</td><td>`HasCrCard`</td><td>0.0018</td><td>0.0008</td><td>Predictive reliance, not causal importance</td></tr><tr><td>10</td><td>`EstimatedSalary`</td><td>-0.0027</td><td>0.0016</td><td>Predictive reliance, not causal importance</td></tr></tbody></table>
+<p><em>Attribution Caution:</em> In alignment with modern interpretability governance, these rankings describe mathematical model reliance within the fitted functional form. They do not describe physical or causal mechanisms.</p>
+<h2>V. Discussion</h2>
+<h3>A. RQ1: Segment Disparities and Statistical Correction</h3>
+<p><em>Empirical Assessment:</em> Bivariate segment comparisons in banking analytics are often reported without adjustment for simultaneous inference. Our audit confirms that all four examined operational dimensions—Geography, Age Band, Product Count, and Active Membership—exhibit statistically significant departures from independence under Pearson's Chi-square tests that comfortably survive Benjamini-Hochberg FDR correction at <em>q = 0.05</em>. In particular, customers aged 46–59 display an observed exit rate of 51.10% (95% CI: [48.77%, 53.63%]), representing a 2.51x elevation relative to the portfolio baseline (20.37%). Similarly, dual-product holders exhibit an exit rate of only 7.58%, compared to 27.71% for single-product holders.</p>
+<p><em>What the evidence establishes:</em> Observed churn differences across the four dimensions are statistically genuine associations that cannot be explained by random sampling variation under the empirical distribution of this dataset.</p>
+<p><em>What the evidence does NOT establish:</em> The evidence does not establish that age or geography <em>causes</em> customer attrition, nor that cross-selling a second banking product will causally reduce a customer's exit propensity. Such conclusions confuse statistical association with treatment effects.</p>
+<h3>B. RQ2: Predictive Validity Under Leakage-Safe Protocols</h3>
+<p><em>Empirical Assessment:</em> Under strict leakage-safe cross-validation and pipeline encapsulation, the candidate features demonstrate genuine predictive power. HistGradientBoosting achieved a 5-fold cross-validated AP of 0.6905 ± 0.0270, exceeding regularized Logistic Regression (0.6168 ± 0.0181) by +0.0737 AP. On the untouched held-out test split, the model achieved an AP of 0.6980 (95% CI: [0.6512, 0.7394]) and an ROC-AUC of 0.8578 (95% CI: [0.8360, 0.8799]), vastly outperforming the naive majority baseline (AP 0.2035, ROC-AUC 0.5000).</p>
+<p><em>What the evidence establishes:</em> Non-linear gradient boosting extracts substantial non-linear interactions from the ten available features, providing a discriminatory ranking of customer risk that is statistically superior to linear baselines and reproducible under strict leakage-free protocols.</p>
+<p><em>What the evidence does NOT establish:</em> The model does not establish prospective forecasting capability over time. Because the underlying data represents a static cross-sectional snapshot without timestamps, the model establishes retrospective discrimination within a single observation window, not longitudinal stability.</p>
+<h3>C. RQ3: Operational Thresholds and Precision-Recall Tension</h3>
+<p><em>Empirical Assessment:</em> The choice of operating threshold exposes an unavoidable operational trade-off that machine learning optimization cannot unilaterally resolve. At the default 0.50 cutoff, the model exhibits strong precision (73.11%) and generates only 71 false alarms across 1,593 retained customers. However, it misses 214 out of 407 actual churners—a false negative miss rate of <strong>52.58%</strong>. Shifting to the CV-tuned threshold of 0.27 increases recall from 47.42% to 69.04% (capturing 88 additional churners), but inflates false alarms from 71 to 213 (a 200% increase), reducing precision to 56.88%.</p>
+<p><em>What the evidence establishes:</em> Operating thresholds impose distinct cost burdens: the 0.50 threshold incurs substantial opportunity costs via missed departures, whereas the 0.27 threshold incurs outreach expenses and customer contact fatigue.</p>
+<p><em>What the evidence does NOT establish:</em> The analysis does not establish which threshold the bank <em>should</em> adopt. Deciding between 0.50 and 0.27 requires institutional financial parameters—specifically the unit cost of marketing outreach versus the net present value of a preserved account—which are absent from the dataset.</p>
+<h3>D. RQ4: Interpretability, Feature Reliance, and the Causal Boundary</h3>
+<p><em>Empirical Assessment:</em> Global SHAP attribution and permutation importance identify product count (`NumOfProducts`, AP drop 0.2727) and age (`Age`, AP drop 0.2381) as the predominant predictive features, followed by active membership (`IsActiveMember`, AP drop 0.0949) and balance (`Balance`, AP drop 0.0612). Income (`EstimatedSalary`) and credit score (`CreditScore`) contribute negligible predictive utility.</p>
+<p><em>What the evidence establishes:</em> The fitted gradient boosting model relies overwhelmingly on account product depth, age brackets, and engagement status to generate risk rankings.</p>
+<p><em>What the evidence does NOT establish:</em> These rankings do not establish that altering feature values will alter customer behavior. For example, manually discounting fees or bundling accounts to increase product count cannot be inferred to prevent churn; such interventions may backfire if multiple product holdings in dissatisfied customers reflect administrative complexity rather than brand loyalty.</p>
+<h2>VI. Threats to Validity and Limitations</h2>
+<p>1. <em>Static Cross-Sectional Data Structure:</em> The dataset provides a single static snapshot with a constant `Year` (2025). There are no longitudinal customer histories, rolling activity windows, or event timestamps. Consequently, hazard modeling, survival forecasting, and drift detection are impossible.</p>
+<p>2. <em>Unverified Data Provenance:</em> The data exhibits structural symmetry with the widely circulated educational `Churn_Modelling` dataset. Because its institutional origins cannot be independently verified, findings should not be interpreted as official European Central Bank data or representative of specific European commercial banks.</p>
+<p>3. <em>Substantial Uncaught Churn (The Real Recall Gap):</em> Even under the tuned 0.27 threshold, the model fails to detect <strong>30.96% of all churning accounts</strong> (126 missed churners). At the standard 0.50 threshold, the model misses <strong>52.58% of all churning accounts</strong> (214 missed churners). In an operational setting, reliance on this model leaves a substantial portion of customer attrition unaddressed.</p>
+<p>4. <em>Absence of Financial Loss and Unit Margin Data:</em> The dataset contains no figures for customer profitability, account maintenance margin, customer acquisition cost (CAC), or retention campaign cost. Without an empirical cost matrix, automated optimization of decision thresholds is mathematically ill-posed.</p>
+<p>5. <em>Non-Causal Boundary:</em> The study relies entirely on observational data. Unobserved confounders (e.g., service outages, competitive market offerings, local branch closures) likely drive both customer product selection and attrition risk.</p>
+<h2>VII. Conclusion and Future Work</h2>
+<p>This study has delivered an audited, leakage-safe empirical evaluation of customer churn classification on an educational European banking dataset. By embedding all preprocessing inside pipeline wrappers, adjusting cohort significance tests using Benjamini-Hochberg FDR control (<em>q=0.05</em>), and computing 1,000-resample non-parametric bootstrap intervals, we established that cohort disparities—including a 51.10% churn rate in the 46–59 age band—are statistically genuine within this dataset. Furthermore, HistGradientBoosting achieved validated ranking performance (test AP 0.6980, ROC-AUC 0.8578), decisively outperforming linear baselines while exposing the critical trade-off between missing 52.58% of churners at threshold 0.50 versus generating 213 false alarms at threshold 0.27.</p>
+<p>To extend this work toward production viability, future efforts should prioritize three concrete objectives:</p>
+<p>1. <em>Acquisition of Longitudinal / Timestamped Data:</em> Sourcing transactional banking telemetry across repeated temporal intervals to enable genuine survival forecasting and hazard rate estimation.</p>
+<p>2. <em>Empirical Cost-Benefit Optimization:</em> Incorporating explicit customer lifetime value (LTV) and intervention cost schedules to transition from heuristic thresholding to cost-minimizing Bayes decision boundaries.</p>
+<p>3. <em>Prospective Randomized Intervention Trials:</em> Conducting randomized controlled trials (A/B testing) on proactive retention campaigns to test whether targeted interventions causally alter customer attrition.</p>
+<h2>Acknowledgment</h2>
+<p>The authors acknowledge the open-source scientific Python community for providing the computational tools that enabled this study, specifically `scikit-learn`, `scipy`, `pandas`, `numpy`, and `shap`.</p>
+<h2>References</h2>
+<div class='ref-item'>[1] A. De Caigny, K. Coussement, and K. W. De Bock, "A new hybrid classification algorithm for customer churn prediction based on logistic regression and decision trees," <em>European Journal of Operational Research</em>, vol. 269, no. 2, pp. 760–772, 2018.</div>
+<div class='ref-item'>[2] S. Kaufman, S. Rosset, C. Perlich, and O. Stitelman, "Leakage in data mining: Formulation, detection, and avoidance," <em>ACM Transactions on Knowledge Discovery from Data (TKDD)</em>, vol. 6, no. 4, pp. 1–21, 2012.</div>
+<div class='ref-item'>[3] S. Kapoor and A. Narayanan, "Leakage and the reproducibility crisis in machine-learning-based science," <em>Patterns</em>, vol. 4, no. 9, p. 100804, 2023.</div>
+<div class='ref-item'>[4] S. M. Lundberg and S.-I. Lee, "A unified approach to interpreting model predictions," in <em>Advances in Neural Information Processing Systems (NeurIPS 30)</em>, 2017, pp. 4765–4774.</div>
+<div class='ref-item'>[5] Y. Benjamini and Y. Hochberg, "Controlling the false discovery rate: A practical and powerful approach to multiple testing," <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>, vol. 57, no. 1, pp. 289–300, 1995.</div>
+<div class='ref-item'>[6] B. Efron and R. J. Tibshirani, <em>An Introduction to the Bootstrap</em>. New York, NY: Chapman & Hall/CRC, 1993.</div>
+<div class='ref-item'>[7] Y. Xie, X. Li, E. W. T. Ngai, and W. Ying, "Customer churn prediction using improved balanced random forests," <em>Expert Systems with Applications</em>, vol. 36, no. 3, pp. 5445–5449, 2009.</div>
+<div class='ref-item'>[8] T. Saito and M. Rehmsmeier, "The precision-recall plot is more informative than the ROC plot when evaluating imbalanced datasets," <em>PLOS ONE</em>, vol. 10, no. 3, p. e0118432, 2015.</div>
+<div class='ref-item'>[9] F. Pedregosa <em>et al.</em>, "Scikit-learn: Machine learning in Python," <em>Journal of Machine Learning Research</em>, vol. 12, pp. 2825–2830, 2011.</div>
+<div class='ref-item'>[10] L. Breiman, "Random forests," <em>Machine Learning</em>, vol. 45, no. 1, pp. 5–32, 2001.</div>
+<div class='ref-item'>[11] J. Pearl, <em>Causality: Models, Reasoning, and Inference</em>, 2nd ed. Cambridge, UK: Cambridge University Press, 2009.</div>
+</div>
+</body>
+</html>

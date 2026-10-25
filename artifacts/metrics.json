@@ -1,0 +1,73 @@
+{
+  "model_selection": {
+    "metric": "Average Precision (AP)",
+    "protocol": "5-fold StratifiedKFold on training partition only (random_state=42). The held-out test set is never used to select or tune the model. Tie-breaker rule: if candidate AP scores are within 0.01 of each other, Logistic Regression is preferred for interpretability.",
+    "selected_model": "HistGradientBoosting",
+    "rationale": "HistGradientBoosting selected: mean CV AP (0.6905) exceeds LogisticRegression (0.6168) by 0.0737 (> 0.01 threshold)."
+  },
+  "cv_comparison": {
+    "Dummy": {
+      "mean_AP": 0.20374999999999996,
+      "std_AP": 2.7755575615628914e-17,
+      "mean_ROC_AUC": 0.5,
+      "std_ROC_AUC": 0.0
+    },
+    "LogisticRegression": {
+      "mean_AP": 0.6168080354859968,
+      "std_AP": 0.018146763331256154,
+      "mean_ROC_AUC": 0.8313827277017461,
+      "std_ROC_AUC": 0.011576975593321106
+    },
+    "HistGradientBoosting": {
+      "mean_AP": 0.6904668344613033,
+      "std_AP": 0.026999315198747587,
+      "mean_ROC_AUC": 0.8565784784890831,
+      "std_ROC_AUC": 0.01099559180145002
+    }
+  },
+  "held_out_test_evaluation": {
+    "selected_model": "HistGradientBoosting",
+    "sample_size": 2000,
+    "AP": 0.6980026474306122,
+    "ROC_AUC": 0.8578038747530273,
+    "metrics_at_default_threshold_0_5": {
+      "label": "default threshold, not necessarily optimal",
+      "threshold": 0.5,
+      "precision": 0.7310606060606061,
+      "recall": 0.4742014742014742,
+      "f1": 0.5752608047690015,
+      "confusion_matrix": {
+        "TN": 1522,
+        "FP": 71,
+        "FN": 214,
+        "TP": 193
+      }
+    },
+    "cv_selected_alternative_threshold": {
+      "label": "CV-selected alternative threshold (comparison only)",
+      "threshold": 0.26999999999999996,
+      "precision": 0.5688259109311741,
+      "recall": 0.6904176904176904,
+      "f1": 0.6237513873473918,
+      "confusion_matrix": {
+        "TN": 1380,
+        "FP": 213,
+        "FN": 126,
+        "TP": 281
+      }
+    },
+    "dummy_baseline_reference": {
+      "AP": 0.2035,
+      "ROC_AUC": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "confusion_matrix": {
+        "TN": 1593,
+        "FP": 0,
+        "FN": 407,
+        "TP": 0
+      }
+    }
+  }
+}

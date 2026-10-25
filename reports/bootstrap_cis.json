@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "resamples": 1000,
+    "random_seed": 42,
+    "confidence_level": 0.95,
+    "ci_method": "percentile"
+  },
+  "overall_churn_rate": {
+    "point_estimate": 0.2037,
+    "ci_lower_95": 0.1963975,
+    "ci_upper_95": 0.21180249999999998
+  },
+  "age_46_59_churn_rate": {
+    "point_estimate": 0.5110410094637224,
+    "ci_lower_95": 0.4876813880126183,
+    "ci_upper_95": 0.5362776025236593
+  },
+  "test_average_precision_ap": {
+    "point_estimate": 0.6980026474306122,
+    "ci_lower_95": 0.6512028414743534,
+    "ci_upper_95": 0.7394076375447315
+  },
+  "test_roc_auc": {
+    "point_estimate": 0.8578038747530273,
+    "ci_lower_95": 0.8359913459179452,
+    "ci_upper_95": 0.8798714640774431
+  }
+}

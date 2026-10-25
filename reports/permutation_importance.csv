@@ -1,0 +1,11 @@
+feature,predictive_importance_mean,predictive_importance_std,interpretability_notice
+NumOfProducts,0.2727350489384233,0.015898902225011287,"Predictive importance, not causal importance"
+Age,0.23808317632516646,0.011532151353122265,"Predictive importance, not causal importance"
+IsActiveMember,0.09486607282733107,0.008325823529358166,"Predictive importance, not causal importance"
+Balance,0.06124354161750225,0.007372724115272458,"Predictive importance, not causal importance"
+Geography,0.04850559999076576,0.004069328878768661,"Predictive importance, not causal importance"
+Gender,0.00809681395852877,0.0027800755515464963,"Predictive importance, not causal importance"
+Tenure,0.0043156249428777495,0.0041755300636849915,"Predictive importance, not causal importance"
+CreditScore,0.0021593769455489076,0.004969365589278871,"Predictive importance, not causal importance"
+HasCrCard,0.0017690601357444936,0.0008027967753497735,"Predictive importance, not causal importance"
+EstimatedSalary,-0.002654033027003555,0.0016402942838527146,"Predictive importance, not causal importance"
