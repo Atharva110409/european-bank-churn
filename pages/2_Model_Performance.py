@@ -40,7 +40,7 @@ from src.ui_theme import (
 )
 
 st.set_page_config(
-    page_title="Model Performance | European Bank Churn",
+    page_title="Model Performance | AuditBank Europe",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"

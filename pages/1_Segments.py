@@ -37,7 +37,7 @@ from src.ui_theme import (
 )
 
 st.set_page_config(
-    page_title="Customer Segments | European Bank Churn",
+    page_title="Customer Segments | AuditBank Europe",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"

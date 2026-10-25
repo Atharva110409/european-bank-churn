@@ -18,14 +18,22 @@ import plotly.graph_objects as go
 # -----------------------------------------------------------------------------
 # 1. COLOR PALETTE CONSTANTS
 # -----------------------------------------------------------------------------
-# Primary brand & interaction accent (Modern Indigo)
-COLOR_PRIMARY = "#6366f1"
-COLOR_PRIMARY_LIGHT = "#818cf8"
-COLOR_PRIMARY_DARK = "#4f46e5"
-COLOR_PRIMARY_BG = "rgba(99, 102, 241, 0.10)"
+# 1. COLOR PALETTE CONSTANTS (INSTITUTIONAL BANKING AUDIT & GOLD ACCENT)
+# -----------------------------------------------------------------------------
+# Primary brand & interaction accent: Institutional Sapphire / Financial Navy
+COLOR_PRIMARY = "#2563eb"
+COLOR_PRIMARY_LIGHT = "#3b82f6"
+COLOR_PRIMARY_DARK = "#1d4ed8"
+COLOR_PRIMARY_BG = "rgba(37, 99, 235, 0.10)"
+
+# Distinctive Secondary Brand Accent: Sovereign / Audit Amber Gold
+COLOR_ACCENT = "#d97706"
+COLOR_ACCENT_LIGHT = "#f59e0b"
+COLOR_ACCENT_DARK = "#b45309"
+COLOR_ACCENT_BG = "rgba(217, 119, 6, 0.12)"
 
 # Semantic Pair: Retained (Stability/Positive) vs Exited (Risk/Churn)
-# Colorblind-safe pair: Teal (#0d9488) vs Coral/Rose (#f43f5e)
+# Colorblind-safe pair: Teal (#0d9488) vs Coral/Rose (#f43f5e) - PRESERVED 100%
 COLOR_RETAINED = "#0d9488"
 COLOR_RETAINED_LIGHT = "#14b8a6"
 COLOR_RETAINED_BG = "rgba(13, 148, 136, 0.12)"
@@ -38,11 +46,11 @@ COLOR_EXITED_BG = "rgba(244, 63, 94, 0.12)"
 COLOR_WARNING = "#f59e0b"         # Amber / Caution / Small Samples
 COLOR_WARNING_BG = "rgba(245, 158, 11, 0.12)"
 
-COLOR_INFO = "#3b82f6"            # Sky Blue / Technical Details
-COLOR_INFO_BG = "rgba(59, 130, 246, 0.10)"
+COLOR_INFO = "#0284c7"            # Slate Cyan / Technical Details
+COLOR_INFO_BG = "rgba(2, 132, 199, 0.10)"
 
-COLOR_PURPLE = "#8b5cf6"          # Purple / Explainability / Causal
-COLOR_PURPLE_BG = "rgba(139, 92, 246, 0.10)"
+COLOR_PURPLE = "#7c3aed"          # Institutional Violet / Explainability
+COLOR_PURPLE_BG = "rgba(124, 58, 237, 0.10)"
 
 # Neutral Grays
 COLOR_NEUTRAL = "#64748b"         # Slate neutral for baseline references
@@ -59,6 +67,21 @@ CHART_COLOR_MAP: Dict[str, str] = {
     "Exited (1)": COLOR_EXITED,
     "1": COLOR_EXITED,
 }
+
+# -----------------------------------------------------------------------------
+# BESPOKE INLINE SVG LOGO MARK (BANK FACADE + DIAGNOSTIC VECTOR)
+# -----------------------------------------------------------------------------
+LOGO_SVG = """<svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; flex-shrink: 0;">
+  <path d="M3 9.5L14 3.5L25 9.5H3Z" fill="#d97706" fill-opacity="0.95"/>
+  <rect x="4" y="10" width="20" height="2" rx="0.5" fill="#94a3b8"/>
+  <rect x="5.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
+  <rect x="10.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
+  <rect x="15" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
+  <rect x="20" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
+  <rect x="3" y="21.5" width="22" height="2.5" rx="0.5" fill="#94a3b8"/>
+  <path d="M7 8.5L15 15.5L22 20.5" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="22" cy="20.5" r="2.2" fill="#f43f5e"/>
+</svg>"""
 
 
 # -----------------------------------------------------------------------------
@@ -79,11 +102,11 @@ def apply_custom_theme() -> None:
         --eb-font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         
         /* Light Mode Defaults */
-        --eb-bg-card: rgba(255, 255, 255, 0.92);
-        --eb-bg-card-subtle: rgba(248, 250, 252, 0.85);
+        --eb-bg-card: rgba(255, 255, 255, 0.94);
+        --eb-bg-card-subtle: rgba(248, 250, 252, 0.90);
         --eb-bg-hover: rgba(241, 245, 249, 0.95);
-        --eb-border-card: rgba(148, 163, 184, 0.25);
-        --eb-border-hover: rgba(99, 102, 241, 0.45);
+        --eb-border-card: rgba(148, 163, 184, 0.28);
+        --eb-border-hover: rgba(37, 99, 235, 0.45);
         --eb-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
         --eb-shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06);
         --eb-shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -94,18 +117,18 @@ def apply_custom_theme() -> None:
         --eb-text-subtle: #94a3b8;
         
         --eb-gridline: rgba(148, 163, 184, 0.18);
-        --eb-badge-bg: rgba(99, 102, 241, 0.10);
-        --eb-badge-text: #4f46e5;
+        --eb-badge-bg: rgba(217, 119, 6, 0.12);
+        --eb-badge-text: #b45309;
     }
 
     /* Dark Mode (System preference or Streamlit dark theme) */
     @media (prefers-color-scheme: dark) {
         :root {
-            --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.72) 0%, rgba(15, 23, 42, 0.82) 100%);
-            --eb-bg-card-subtle: rgba(30, 41, 59, 0.55);
-            --eb-bg-hover: rgba(51, 65, 85, 0.65);
-            --eb-border-card: rgba(255, 255, 255, 0.08);
-            --eb-border-hover: rgba(99, 102, 241, 0.5);
+            --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.78) 0%, rgba(15, 23, 42, 0.88) 100%);
+            --eb-bg-card-subtle: rgba(30, 41, 59, 0.58);
+            --eb-bg-hover: rgba(51, 65, 85, 0.68);
+            --eb-border-card: rgba(148, 163, 184, 0.14);
+            --eb-border-hover: rgba(59, 130, 246, 0.55);
             --eb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
             --eb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.32);
             --eb-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.45);
@@ -116,22 +139,24 @@ def apply_custom_theme() -> None:
             --eb-text-subtle: #64748b;
             
             --eb-gridline: rgba(255, 255, 255, 0.08);
-            --eb-badge-bg: rgba(99, 102, 241, 0.20);
-            --eb-badge-text: #a5b4fc;
+            --eb-badge-bg: rgba(217, 119, 6, 0.20);
+            --eb-badge-text: #fcd34d;
         }
     }
 
     /* Streamlit explicit dark theme overrides */
     [data-theme="dark"], .stApp[data-theme="dark"] {
-        --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.72) 0%, rgba(15, 23, 42, 0.82) 100%);
-        --eb-bg-card-subtle: rgba(30, 41, 59, 0.55);
-        --eb-border-card: rgba(255, 255, 255, 0.08);
-        --eb-border-hover: rgba(99, 102, 241, 0.5);
+        --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.78) 0%, rgba(15, 23, 42, 0.88) 100%);
+        --eb-bg-card-subtle: rgba(30, 41, 59, 0.58);
+        --eb-border-card: rgba(148, 163, 184, 0.14);
+        --eb-border-hover: rgba(59, 130, 246, 0.55);
         --eb-text-title: #f8fafc;
         --eb-text-body: #cbd5e1;
         --eb-text-label: #94a3b8;
         --eb-text-subtle: #64748b;
         --eb-gridline: rgba(255, 255, 255, 0.08);
+        --eb-badge-bg: rgba(217, 119, 6, 0.20);
+        --eb-badge-text: #fcd34d;
     }
 
     html, body, [class*="css"] {
@@ -416,18 +441,24 @@ def apply_custom_theme() -> None:
         border: 1px solid rgba(244, 63, 94, 0.35);
     }
     .badge-info {
-        background: rgba(99, 102, 241, 0.15);
-        color: #818cf8;
-        border: 1px solid rgba(99, 102, 241, 0.3);
+        background: rgba(217, 119, 6, 0.15);
+        color: #f59e0b;
+        border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-navy {
+        background: rgba(37, 99, 235, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(37, 99, 235, 0.35);
     }
 
-    /* Sidebar Branding */
+    /* Sidebar Branding with Bespoke SVG */
     .sidebar-brand-card {
-        padding: 0.9rem 1rem;
-        border-radius: 10px;
+        padding: 0.95rem 1.1rem;
+        border-radius: 12px;
         background: var(--eb-bg-card-subtle);
         border: 1px solid var(--eb-border-card);
         margin-bottom: 1.25rem;
+        box-shadow: var(--eb-shadow-sm);
     }
     .sidebar-brand-title {
         font-family: var(--eb-font-heading);
@@ -436,12 +467,114 @@ def apply_custom_theme() -> None:
         color: var(--eb-text-title);
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.6rem;
     }
     .sidebar-brand-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.725rem;
+        font-weight: 500;
         color: var(--eb-text-label);
-        margin-top: 0.2rem;
+        margin-top: 0.3rem;
+        letter-spacing: 0.02em;
+    }
+
+    /* Cohort Demographic Risk Heat Strip Component */
+    .risk-heat-strip-card {
+        background: var(--eb-bg-card);
+        border: 1px solid var(--eb-border-card);
+        border-radius: 14px;
+        padding: 1.15rem 1.4rem;
+        box-shadow: var(--eb-shadow-md);
+        margin-bottom: 1.4rem;
+    }
+    .risk-strip-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.85rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .risk-strip-title {
+        font-family: var(--eb-font-heading);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--eb-text-title);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: -0.01em;
+    }
+    .risk-strip-baseline {
+        font-size: 0.775rem;
+        color: var(--eb-text-label);
+        background: var(--eb-bg-card-subtle);
+        padding: 0.25rem 0.65rem;
+        border-radius: 6px;
+        border: 1px solid var(--eb-border-card);
+    }
+    .risk-strip-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.85rem;
+    }
+    @media (max-width: 900px) {
+        .risk-strip-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    .risk-cohort-item {
+        background: var(--eb-bg-card-subtle);
+        border: 1px solid var(--eb-border-card);
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .risk-cohort-item:hover {
+        transform: translateY(-2px);
+        border-color: var(--eb-border-hover);
+    }
+    .risk-cohort-item.spike-alert {
+        border: 1.5px solid rgba(244, 63, 94, 0.5);
+        background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(217, 119, 6, 0.08) 100%);
+    }
+    .risk-cohort-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--eb-text-label);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .risk-cohort-rate {
+        font-family: var(--eb-font-heading);
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: var(--eb-text-title);
+        line-height: 1.15;
+        margin: 0.35rem 0 0.2rem 0;
+    }
+    .risk-cohort-rate.spike {
+        color: #f43f5e;
+    }
+    .risk-cohort-sub {
+        font-size: 0.725rem;
+        color: var(--eb-text-subtle);
+        margin-bottom: 0.55rem;
+    }
+    .risk-bar-track {
+        height: 6px;
+        background: rgba(148, 163, 184, 0.2);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+    }
+    .risk-bar-fill {
+        height: 100%;
+        border-radius: 999px;
     }
 
     /* Streamlit DataFrame Container Polish */
@@ -458,19 +591,20 @@ def apply_custom_theme() -> None:
 # 3. REUSABLE UI COMPONENTS
 # -----------------------------------------------------------------------------
 def render_page_header(
-    icon: str,
-    title: str,
-    subtitle: str,
+    icon: Optional[str] = None,
+    title: str = "AuditBank Europe",
+    subtitle: str = "Leakage-Safe Statistical Audit & Generalization Benchmark",
     badge: Optional[str] = "Audited Analytics"
 ) -> None:
     """
-    Renders an elevated dashboard hero header with icon, title, subtitle, and status pill.
+    Renders an elevated dashboard hero header with custom SVG/icon, title, subtitle, and status pill.
     """
+    display_icon = icon if icon else LOGO_SVG
     badge_html = f'<span class="badge badge-info">{badge}</span>' if badge else ""
     st.markdown(f"""
     <div class="page-header-card">
         <div class="page-header-left">
-            <div class="page-header-icon">{icon}</div>
+            <div class="page-header-icon">{display_icon}</div>
             <div>
                 <h1 class="page-header-title">{title}</h1>
                 <div class="page-header-subtitle">{subtitle}</div>
@@ -481,16 +615,72 @@ def render_page_header(
     """, unsafe_allow_html=True)
 
 
-def render_sidebar_branding() -> None:
+def render_sidebar_branding(
+    app_title: str = "AuditBank Europe",
+    app_subtitle: str = "Leakage-Safe Churn Audit • v1.0"
+) -> None:
     """
-    Renders a unified top brand card in the sidebar navigation.
+    Renders a unified top brand card in the sidebar navigation with custom SVG branding.
     """
-    st.sidebar.markdown("""
+    st.sidebar.markdown(f"""
     <div class="sidebar-brand-card">
-        <div class="sidebar-brand-title">🏦 European Bank Churn</div>
-        <div class="sidebar-brand-subtitle">Executive Risk & Portfolio Analytics • v1.0</div>
+        <div class="sidebar-brand-title">{LOGO_SVG} <span>{app_title}</span></div>
+        <div class="sidebar-brand-subtitle">{app_subtitle}</div>
     </div>
     """, unsafe_allow_html=True)
+
+
+def render_cohort_risk_heat_strip(
+    age_summary: Any,
+    overall_churn_rate: float = 0.2037
+) -> None:
+    """
+    Renders an executive demographic risk heat strip comparing all 4 age cohorts side-by-side.
+    Visually showcases the 46-59 churn concentration spike against the portfolio baseline.
+    """
+    items_html = []
+    for _, row in age_summary.iterrows():
+        seg = str(row["segment"])
+        n_val = int(row["n"])
+        rate_val = float(row["churn_rate"])
+        exits_val = int(row["exited"])
+        multiplier = rate_val / overall_churn_rate if overall_churn_rate > 0 else 1.0
+
+        is_spike = (seg == "46-59")
+        item_class = "risk-cohort-item spike-alert" if is_spike else "risk-cohort-item"
+        rate_class = "risk-cohort-rate spike" if is_spike else "risk-cohort-rate"
+
+        if is_spike:
+            tag_html = f'<span class="kpi-delta-pill delta-exited" style="font-size: 0.65rem; padding: 0.15rem 0.45rem;">🔥 {multiplier:.2f}x Baseline</span>'
+            fill_style = f"width: {min(rate_val * 100, 100):.1f}%; background: linear-gradient(90deg, #f59e0b 0%, #f43f5e 100%); box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);"
+        elif rate_val < overall_churn_rate:
+            tag_html = '<span class="kpi-delta-pill delta-retained" style="font-size: 0.65rem; padding: 0.15rem 0.45rem;">Low Risk</span>'
+            fill_style = f"width: {min(rate_val * 100, 100):.1f}%; background: #0d9488;"
+        else:
+            tag_html = '<span class="kpi-delta-pill delta-warning" style="font-size: 0.65rem; padding: 0.15rem 0.45rem;">Elevated</span>'
+            fill_style = f"width: {min(rate_val * 100, 100):.1f}%; background: #f59e0b;"
+
+        items_html.append(
+            f'<div class="{item_class}">'
+            f'<div class="risk-cohort-label"><span>Age {seg}</span>{tag_html}</div>'
+            f'<div class="{rate_class}">{rate_val:.1%}</div>'
+            f'<div class="risk-cohort-sub">{exits_val:,} exits / {n_val:,} accounts</div>'
+            f'<div class="risk-bar-track"><div class="risk-bar-fill" style="{fill_style}"></div></div>'
+            f'</div>'
+        )
+
+    grid_content = "".join(items_html)
+
+    html = (
+        f'<div class="risk-heat-strip-card">'
+        f'<div class="risk-strip-header">'
+        f'<div class="risk-strip-title"><span>📊</span> Demographic Churn Risk Heat Strip (Empirical Age Cohorts)</div>'
+        f'<div class="risk-strip-baseline">Portfolio Baseline: <strong>{overall_churn_rate:.2%} Churn</strong></div>'
+        f'</div>'
+        f'<div class="risk-strip-grid">{grid_content}</div>'
+        f'</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_kpi_card(

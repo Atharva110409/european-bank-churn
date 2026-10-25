@@ -24,9 +24,12 @@ from src.ui_theme import (
     render_provenance_disclaimer,
     render_kpi_card,
     render_headline_callout,
+    render_cohort_risk_heat_strip,
     render_callout,
     style_plotly_figure,
+    LOGO_SVG,
     COLOR_PRIMARY,
+    COLOR_ACCENT,
     COLOR_RETAINED,
     COLOR_EXITED,
     COLOR_WARNING,
@@ -36,7 +39,7 @@ from src.ui_theme import (
 
 # Page configuration
 st.set_page_config(
-    page_title="Overview | European Bank Churn Analytics",
+    page_title="Overview | AuditBank Europe: Leakage-Safe Churn Intelligence",
     page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -48,12 +51,12 @@ apply_custom_theme()
 # Top sidebar brand & navigation header
 render_sidebar_branding()
 
-# Top Hero Page Header
+# Top Hero Page Header with custom SVG branding
 render_page_header(
-    icon="🏦",
-    title="European Bank Churn Analytics",
+    icon=LOGO_SVG,
+    title="AuditBank: European Churn Intelligence",
     subtitle="Audited Portfolio Audit, Demographic Risk Segmentation & Predictive Modeling Intelligence",
-    badge="Executive Overview"
+    badge="Leakage-Safe Audit MVP"
 )
 
 # Mandatory Provenance Disclaimer Callout
@@ -152,6 +155,9 @@ with col5:
     )
 
 st.markdown("<div style='margin-bottom: 1.25rem;'></div>", unsafe_allow_html=True)
+
+# ----------------- SECTION 1B: Distinctive Demographic Risk Heat Strip -----------------
+render_cohort_risk_heat_strip(age_summary, overall_churn_rate)
 
 # ----------------- SECTION 2: Headline Finding & Decision Caveat -----------------
 render_headline_callout(

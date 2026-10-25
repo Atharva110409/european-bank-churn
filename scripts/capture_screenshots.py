@@ -81,8 +81,8 @@ async def capture_page(target_url, output_filename, window_size="1440,1100", scr
             proc.kill()
 
 async def main():
-    # Overview page: window size 1440x1380 captures KPI cards, headline finding banner, and donut/distribution charts
-    await capture_page("http://localhost:8501", "dashboard_overview.png", window_size="1440,1380", scroll_y=0, wait_seconds=8)
+    # Overview page: window size 1440x1550 captures KPI cards, heat strip, headline finding banner, and donut/distribution charts
+    await capture_page("http://localhost:8501", "dashboard_overview.png", window_size="1440,1550", scroll_y=0, wait_seconds=8)
     await asyncio.sleep(2)
     # Model Performance page: scroll down to capture threshold comparison cards and confusion matrix heatmap
     await capture_page("http://localhost:8501/Model_Performance", "dashboard_model_performance.png", window_size="1440,1100", scroll_y=1100, wait_seconds=8)
