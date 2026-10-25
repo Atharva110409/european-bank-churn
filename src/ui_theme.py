@@ -511,23 +511,16 @@ def render_kpi_card(
 
     subtext_content = ""
     if delta or subtext:
-        subtext_content = f"""
-        <div class="kpi-subtext">
-            {delta_html}
-            <span>{subtext}</span>
-        </div>
-        """
+        subtext_content = f'<div class="kpi-subtext">{delta_html}<span>{subtext}</span></div>'
 
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-header">
-            <span class="kpi-label">{label}</span>
-            {icon_html}
-        </div>
-        <div class="kpi-value">{value}</div>
-        {subtext_content}
-    </div>
-    """, unsafe_allow_html=True)
+    html = (
+        f'<div class="kpi-card">'
+        f'<div class="kpi-header"><span class="kpi-label">{label}</span>{icon_html}</div>'
+        f'<div class="kpi-value">{value}</div>'
+        f'{subtext_content}'
+        f'</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_headline_callout(
@@ -543,27 +536,26 @@ def render_headline_callout(
     """
     stat_html = ""
     if stat_value and stat_label:
-        stat_html = f"""
-        <div style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; padding: 0.75rem 1.25rem; text-align: center; min-width: 140px;">
-            <div style="font-family: var(--eb-font-heading); font-size: 1.6rem; font-weight: 800; color: #818cf8; line-height: 1.1;">{stat_value}</div>
-            <div style="font-size: 0.725rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--eb-text-label); margin-top: 0.2rem;">{stat_label}</div>
-        </div>
-        """
+        stat_html = (
+            f'<div style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; padding: 0.75rem 1.25rem; text-align: center; min-width: 140px;">'
+            f'<div style="font-family: var(--eb-font-heading); font-size: 1.6rem; font-weight: 800; color: #818cf8; line-height: 1.1;">{stat_value}</div>'
+            f'<div style="font-size: 0.725rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--eb-text-label); margin-top: 0.2rem;">{stat_label}</div>'
+            f'</div>'
+        )
 
-    st.markdown(f"""
-    <div class="headline-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 280px;">
-                <span class="headline-badge">🔍 {badge}</span>
-                <div style="font-family: var(--eb-font-heading); font-size: 1.25rem; font-weight: 700; color: var(--eb-text-title); margin-bottom: 0.45rem;">
-                    {title}
-                </div>
-                <div class="headline-text">{text}</div>
-            </div>
-            {stat_html}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    html = (
+        f'<div class="headline-card">'
+        f'<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">'
+        f'<div style="flex: 1; min-width: 280px;">'
+        f'<span class="headline-badge">🔍 {badge}</span>'
+        f'<div style="font-family: var(--eb-font-heading); font-size: 1.25rem; font-weight: 700; color: var(--eb-text-title); margin-bottom: 0.45rem;">{title}</div>'
+        f'<div class="headline-text">{text}</div>'
+        f'</div>'
+        f'{stat_html}'
+        f'</div>'
+        f'</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_callout(
@@ -587,12 +579,12 @@ def render_callout(
     box_class = type_class_map.get(callout_type, "callout-methodology")
     icon_prefix = f"{icon} " if icon else ""
 
-    st.markdown(f"""
-    <div class="callout-box {box_class}">
-        <strong>{icon_prefix}{title}</strong><br>
-        {text}
-    </div>
-    """, unsafe_allow_html=True)
+    html = (
+        f'<div class="callout-box {box_class}">'
+        f'<strong>{icon_prefix}{title}</strong><br>{text}'
+        f'</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_provenance_disclaimer() -> None:

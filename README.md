@@ -4,9 +4,14 @@ A reproducible, leak-free customer churn risk modeling and multi-dimensional seg
 
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)](https://european-bank-churn.streamlit.app)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/atharva-code/european-bank-churn)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)](https://european-bank-churn.streamlit.app/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/Atharva110409/european-bank-churn)
 [![Build Status](https://img.shields.io/badge/tests-8%2F8%20passing-success)](tests/test_pipeline.py)
+
+🔗 Live Demo: https://european-bank-churn.streamlit.app/
+
+![Live dashboard — Overview page](docs/images/dashboard_overview.png)
+*Live dashboard — Overview page*
 
 ---
 
@@ -175,6 +180,9 @@ Evaluated on the 8,000-record training partition (`random_state=42`):
 
 ### Operational Threshold Comparison & Confusion Matrix
 Evaluated on 407 actual exits and 1,593 retained customers in held-out test data:
+
+![Live dashboard — Model Performance page](docs/images/dashboard_model_performance.png)
+*Live dashboard — Model Performance page*
 
 | Dimension | Default Threshold (0.50)<br>*(Prioritizes Precision)* | CV-Tuned Alternative (0.27)<br>*(Prioritizes Detection)* |
 | :--- | :--- | :--- |
