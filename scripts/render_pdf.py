@@ -138,7 +138,7 @@ def render_markdown_to_ieee_pdf(
     i = 0
     n = len(lines)
     title = ""
-    authors = []
+    author_lines = []
 
     # Parse title and authors
     while i < n:
@@ -147,23 +147,18 @@ def render_markdown_to_ieee_pdf(
             title = line[2:].strip()
             i += 1
             continue
-        if "**[Author Name" in line:
-            author_text = line
-            while i + 1 < n and not lines[i + 1].strip().startswith("---"):
-                i += 1
-                author_text += "<br>" + lines[i].strip()
-            authors.append(author_text)
-            i += 1
-            continue
         if line.startswith("---"):
             i += 1
             break
+        if line:
+            clean_l = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", line)
+            author_lines.append(clean_l)
         i += 1
 
     out.append("<div class='title-block'>")
     out.append(f"<h1 class='paper-title'>{title}</h1>")
-    if authors:
-        out.append(f"<div class='author-block'>{authors[0]}</div>")
+    if author_lines:
+        out.append(f"<div class='author-block'>{'<br>'.join(author_lines)}</div>")
     out.append("</div>")
 
     # Abstract box
@@ -238,6 +233,21 @@ def render_markdown_to_ieee_pdf(
         if stripped.startswith("[") and "] " in stripped and (stripped[1].isdigit() or stripped[2].isdigit()):
             ref_clean = re.sub(r"\*(.*?)\*", r"<em>\1</em>", stripped)
             out.append(f"<div class='ref-item'>{ref_clean}</div>")
+            i += 1
+            continue
+        if stripped.startswith("$$") and stripped.endswith("$$"):
+            eq_text = stripped[2:-2].strip()
+            eq_text = eq_text.replace(r"\chi^2", "χ²")
+            eq_text = eq_text.replace(r"\sum_{i=1}^{r}", "∑<sub>i=1</sub><sup>r</sup>")
+            eq_text = eq_text.replace(r"\sum_{j=1}^{c}", "∑<sub>j=1</sub><sup>c</sup>")
+            eq_text = eq_text.replace(r"\frac{(O_{ij} - E_{ij})^2}{E_{ij}}", "((O<sub>ij</sub> − E<sub>ij</sub>)² / E<sub>ij</sub>)")
+            eq_text = eq_text.replace(r"\sqrt{\frac{\chi^2}{N \min(r - 1, c - 1)}}", "√[ χ² / (N · min(r − 1, c − 1)) ]")
+            eq_text = eq_text.replace(r"\min \left( 1, \min_{k \ge i} \frac{m}{k} p_{(k)} \right)", "min(1, min<sub>k≥i</sub> (m/k) · p<sub>(k)</sub>)")
+            eq_text = eq_text.replace(r"\left[ \hat{\theta}_{(0.025B)}, \hat{\theta}_{(0.975B)} \right]", "[ θ̂<sub>(0.025B)</sub>, θ̂<sub>(0.975B)</sub> ]")
+            eq_text = eq_text.replace(r"\overline{\text{AP}}_{\text{HGB}} - \overline{\text{AP}}_{\text{LR}} \le 0.01; \text{ otherwise select HGB.}", "AP̄<sub>HGB</sub> − AP̄<sub>LR</sub> ≤ 0.01; otherwise select HGB.")
+            eq_text = eq_text.replace(r"\text{Select logistic regression if }", "Select logistic regression if ")
+            eq_text = eq_text.replace(r"\quad", " &nbsp;&nbsp;&nbsp;&nbsp; ")
+            out.append(f"<p class='no-indent' style='text-align: center; margin: 6pt 0; font-family: Cambria, \"Times New Roman\", serif;'><em>{eq_text}</em></p>")
             i += 1
             continue
         if stripped:
