@@ -4,11 +4,11 @@ A reproducible, leak-free customer churn risk modeling and multi-dimensional seg
 
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)](https://atharva-bank-churn.streamlit.app/)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)](https://european-bank-churn-jsd5kuzbd98wuc4wkvd2lg.streamlit.app/)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/Atharva110409/european-bank-churn)
 [![Build Status](https://img.shields.io/badge/tests-8%2F8%20passing-success)](tests/test_pipeline.py)
 
-🔗 Live Demo: https://atharva-bank-churn.streamlit.app/
+🔗 Live Demo: https://european-bank-churn-jsd5kuzbd98wuc4wkvd2lg.streamlit.app/
 
 ![Live dashboard — Overview page](docs/images/dashboard_overview.png)
 *Live dashboard — Overview page*

@@ -208,7 +208,7 @@ with col_perm_table:
 
 with col_perm_card:
     st.markdown(f"""
-    <div class="content-card" style="border-left: 4px solid {COLOR_RETAINED};">
+    <div class="content-card" style="border-left: 4px solid {COLOR_PRIMARY};">
         <div class="content-card-title">✅ Attribution Cross-Check Confirmation</div>
         <div style="font-size: 0.85rem; color: var(--eb-text-body); line-height: 1.6; margin-bottom: 0.75rem;">
             Permutation importance independently confirms that <strong>{top_features[0]}</strong> (mean AP drop: {perm_map[top_features[0]]:.4f}) and <strong>{top_features[1]}</strong> (mean AP drop: {perm_map[top_features[1]]:.4f}) 

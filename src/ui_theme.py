@@ -18,45 +18,46 @@ import plotly.graph_objects as go
 # -----------------------------------------------------------------------------
 # 1. COLOR PALETTE CONSTANTS
 # -----------------------------------------------------------------------------
-# 1. COLOR PALETTE CONSTANTS (INSTITUTIONAL BANKING AUDIT & GOLD ACCENT)
+# 1. COLOR PALETTE CONSTANTS (SOVEREIGN AUDIT GOLD & ZINC NEUTRALS)
 # -----------------------------------------------------------------------------
-# Primary brand & interaction accent: Institutional Sapphire / Financial Navy
-COLOR_PRIMARY = "#2563eb"
-COLOR_PRIMARY_LIGHT = "#3b82f6"
-COLOR_PRIMARY_DARK = "#1d4ed8"
-COLOR_PRIMARY_BG = "rgba(37, 99, 235, 0.10)"
+# Primary brand & interaction accent: Sovereign Audit Gold / Warm Amber
+COLOR_PRIMARY = "#f59e0b"
+COLOR_PRIMARY_LIGHT = "#fbbf24"
+COLOR_PRIMARY_DARK = "#d97706"
+COLOR_PRIMARY_BG = "rgba(245, 158, 11, 0.12)"
 
-# Distinctive Secondary Brand Accent: Sovereign / Audit Amber Gold
-COLOR_ACCENT = "#d97706"
-COLOR_ACCENT_LIGHT = "#f59e0b"
-COLOR_ACCENT_DARK = "#b45309"
-COLOR_ACCENT_BG = "rgba(217, 119, 6, 0.12)"
+# Unified Accent: Warm Sovereign Gold
+COLOR_ACCENT = "#f59e0b"
+COLOR_ACCENT_LIGHT = "#fbbf24"
+COLOR_ACCENT_DARK = "#d97706"
+COLOR_ACCENT_BG = "rgba(245, 158, 11, 0.12)"
 
 # Semantic Pair: Retained (Stability/Positive) vs Exited (Risk/Churn)
-# Colorblind-safe pair: Teal (#0d9488) vs Coral/Rose (#f43f5e) - PRESERVED 100%
+# Colorblind-safe pair: Teal (#0d9488) vs Coral/Rose (#f43f5e) - STRICTLY RESERVED FOR DATA ONLY
 COLOR_RETAINED = "#0d9488"
 COLOR_RETAINED_LIGHT = "#14b8a6"
-COLOR_RETAINED_BG = "rgba(13, 148, 136, 0.12)"
+COLOR_RETAINED_BG = "rgba(13, 148, 136, 0.14)"
 
 COLOR_EXITED = "#f43f5e"
 COLOR_EXITED_LIGHT = "#fb7185"
-COLOR_EXITED_BG = "rgba(244, 63, 94, 0.12)"
+COLOR_EXITED_BG = "rgba(244, 63, 94, 0.14)"
 
 # Functional / Alert Colors
 COLOR_WARNING = "#f59e0b"         # Amber / Caution / Small Samples
-COLOR_WARNING_BG = "rgba(245, 158, 11, 0.12)"
+COLOR_WARNING_BG = "rgba(245, 158, 11, 0.14)"
 
-COLOR_INFO = "#0284c7"            # Slate Cyan / Technical Details
-COLOR_INFO_BG = "rgba(2, 132, 199, 0.10)"
+# Consolidated Info & Attribution (Unified with Sovereign Gold, retiring separate indigo/purple)
+COLOR_INFO = "#f59e0b"
+COLOR_INFO_BG = "rgba(245, 158, 11, 0.12)"
 
-COLOR_PURPLE = "#7c3aed"          # Institutional Violet / Explainability
-COLOR_PURPLE_BG = "rgba(124, 58, 237, 0.10)"
+COLOR_PURPLE = "#f59e0b"          # Unified to amber/gold to consolidate palette
+COLOR_PURPLE_BG = "rgba(245, 158, 11, 0.12)"
 
-# Neutral Grays
-COLOR_NEUTRAL = "#64748b"         # Slate neutral for baseline references
-COLOR_NEUTRAL_LIGHT = "#94a3b8"
-COLOR_NEUTRAL_DARK = "#334155"
-COLOR_NEUTRAL_BG = "rgba(100, 116, 139, 0.10)"
+# Neutral Grays (Zinc True Neutrals)
+COLOR_NEUTRAL = "#71717a"         # Neutral zinc for baseline references
+COLOR_NEUTRAL_LIGHT = "#a1a1aa"
+COLOR_NEUTRAL_DARK = "#27272a"
+COLOR_NEUTRAL_BG = "rgba(255, 255, 255, 0.08)"
 
 # Standard Color Mapping for Charts
 CHART_COLOR_MAP: Dict[str, str] = {
@@ -72,13 +73,13 @@ CHART_COLOR_MAP: Dict[str, str] = {
 # BESPOKE INLINE SVG LOGO MARK (BANK FACADE + DIAGNOSTIC VECTOR)
 # -----------------------------------------------------------------------------
 LOGO_SVG = """<svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; flex-shrink: 0;">
-  <path d="M3 9.5L14 3.5L25 9.5H3Z" fill="#d97706" fill-opacity="0.95"/>
-  <rect x="4" y="10" width="20" height="2" rx="0.5" fill="#94a3b8"/>
-  <rect x="5.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
-  <rect x="10.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
-  <rect x="15" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
-  <rect x="20" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#cbd5e1"/>
-  <rect x="3" y="21.5" width="22" height="2.5" rx="0.5" fill="#94a3b8"/>
+  <path d="M3 9.5L14 3.5L25 9.5H3Z" fill="#f59e0b" fill-opacity="0.95"/>
+  <rect x="4" y="10" width="20" height="2" rx="0.5" fill="#a1a1aa"/>
+  <rect x="5.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#d4d4d8"/>
+  <rect x="10.5" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#d4d4d8"/>
+  <rect x="15" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#d4d4d8"/>
+  <rect x="20" y="12.5" width="2.5" height="8.5" rx="0.5" fill="#d4d4d8"/>
+  <rect x="3" y="21.5" width="22" height="2.5" rx="0.5" fill="#a1a1aa"/>
   <path d="M7 8.5L15 15.5L22 20.5" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="22" cy="20.5" r="2.2" fill="#f43f5e"/>
 </svg>"""
@@ -121,42 +122,47 @@ def apply_custom_theme() -> None:
         --eb-badge-text: #b45309;
     }
 
-    /* Dark Mode (System preference or Streamlit dark theme) */
+    /* Dark Mode (System preference or Streamlit dark theme) - True Black / Near-Black */
     @media (prefers-color-scheme: dark) {
         :root {
-            --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.78) 0%, rgba(15, 23, 42, 0.88) 100%);
-            --eb-bg-card-subtle: rgba(30, 41, 59, 0.58);
-            --eb-bg-hover: rgba(51, 65, 85, 0.68);
-            --eb-border-card: rgba(148, 163, 184, 0.14);
-            --eb-border-hover: rgba(59, 130, 246, 0.55);
-            --eb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
-            --eb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.32);
-            --eb-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.45);
+            --eb-bg-card: rgba(22, 22, 24, 0.94);
+            --eb-bg-card-subtle: rgba(28, 28, 32, 0.88);
+            --eb-bg-hover: rgba(38, 38, 44, 0.95);
+            --eb-border-card: rgba(255, 255, 255, 0.12);
+            --eb-border-hover: rgba(245, 158, 11, 0.55);
+            --eb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+            --eb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.75);
+            --eb-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.9);
             
-            --eb-text-title: #f8fafc;
-            --eb-text-body: #cbd5e1;
-            --eb-text-label: #94a3b8;
-            --eb-text-subtle: #64748b;
+            --eb-text-title: #f5f5f5;
+            --eb-text-body: #d4d4d8;
+            --eb-text-label: #a1a1aa;
+            --eb-text-subtle: #71717a;
             
-            --eb-gridline: rgba(255, 255, 255, 0.08);
-            --eb-badge-bg: rgba(217, 119, 6, 0.20);
-            --eb-badge-text: #fcd34d;
+            --eb-gridline: rgba(255, 255, 255, 0.09);
+            --eb-badge-bg: rgba(245, 158, 11, 0.18);
+            --eb-badge-text: #fbbf24;
         }
     }
 
-    /* Streamlit explicit dark theme overrides */
+    /* Streamlit explicit dark theme overrides - True Black / Near-Black */
     [data-theme="dark"], .stApp[data-theme="dark"] {
-        --eb-bg-card: linear-gradient(135deg, rgba(30, 41, 59, 0.78) 0%, rgba(15, 23, 42, 0.88) 100%);
-        --eb-bg-card-subtle: rgba(30, 41, 59, 0.58);
-        --eb-border-card: rgba(148, 163, 184, 0.14);
-        --eb-border-hover: rgba(59, 130, 246, 0.55);
-        --eb-text-title: #f8fafc;
-        --eb-text-body: #cbd5e1;
-        --eb-text-label: #94a3b8;
-        --eb-text-subtle: #64748b;
-        --eb-gridline: rgba(255, 255, 255, 0.08);
-        --eb-badge-bg: rgba(217, 119, 6, 0.20);
-        --eb-badge-text: #fcd34d;
+        --eb-bg-card: rgba(22, 22, 24, 0.94);
+        --eb-bg-card-subtle: rgba(28, 28, 32, 0.88);
+        --eb-bg-hover: rgba(38, 38, 44, 0.95);
+        --eb-border-card: rgba(255, 255, 255, 0.12);
+        --eb-border-hover: rgba(245, 158, 11, 0.55);
+        --eb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+        --eb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.75);
+        --eb-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.9);
+        
+        --eb-text-title: #f5f5f5;
+        --eb-text-body: #d4d4d8;
+        --eb-text-label: #a1a1aa;
+        --eb-text-subtle: #71717a;
+        --eb-gridline: rgba(255, 255, 255, 0.09);
+        --eb-badge-bg: rgba(245, 158, 11, 0.18);
+        --eb-badge-text: #fbbf24;
     }
 
     html, body, [class*="css"] {
@@ -321,9 +327,9 @@ def apply_custom_theme() -> None:
 
     /* Headline Strategic Callout */
     .headline-card {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.10) 0%, rgba(13, 148, 136, 0.06) 100%);
-        border: 1px solid rgba(99, 102, 241, 0.35);
-        border-left: 5px solid #6366f1;
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(22, 22, 24, 0.95) 100%);
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        border-left: 5px solid #f59e0b;
         border-radius: 12px;
         padding: 1.35rem 1.6rem;
         box-shadow: var(--eb-shadow-md);
@@ -337,8 +343,8 @@ def apply_custom_theme() -> None:
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        background: rgba(99, 102, 241, 0.2);
-        color: #818cf8;
+        background: rgba(245, 158, 11, 0.22);
+        color: #fbbf24;
         margin-bottom: 0.6rem;
     }
     .headline-text {
@@ -363,48 +369,48 @@ def apply_custom_theme() -> None:
     .callout-disclaimer {
         background: linear-gradient(90deg, rgba(245, 158, 11, 0.10) 0%, rgba(245, 158, 11, 0.04) 100%);
         border-left: 4px solid #f59e0b;
-        border-top: 1px solid rgba(245, 158, 11, 0.2);
-        border-right: 1px solid rgba(245, 158, 11, 0.12);
-        border-bottom: 1px solid rgba(245, 158, 11, 0.12);
+        border-top: 1px solid rgba(245, 158, 11, 0.25);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .callout-disclaimer strong {
-        color: #f59e0b;
+        color: #fbbf24;
     }
     .callout-tradeoff {
-        background: linear-gradient(90deg, rgba(249, 115, 22, 0.10) 0%, rgba(245, 158, 11, 0.04) 100%);
-        border-left: 4px solid #f97316;
-        border-top: 1px solid rgba(249, 115, 22, 0.2);
-        border-right: 1px solid rgba(249, 115, 22, 0.12);
-        border-bottom: 1px solid rgba(249, 115, 22, 0.12);
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%);
+        border-left: 4px solid #f59e0b;
+        border-top: 1px solid rgba(245, 158, 11, 0.25);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .callout-tradeoff strong {
-        color: #f97316;
+        color: #fbbf24;
     }
     .callout-methodology {
-        background: linear-gradient(90deg, rgba(99, 102, 241, 0.10) 0%, rgba(59, 130, 246, 0.04) 100%);
-        border-left: 4px solid #6366f1;
-        border-top: 1px solid rgba(99, 102, 241, 0.2);
-        border-right: 1px solid rgba(99, 102, 241, 0.12);
-        border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border-left: 4px solid #d97706;
+        border-top: 1px solid rgba(217, 119, 6, 0.25);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .callout-methodology strong {
-        color: #818cf8;
+        color: #fbbf24;
     }
     .callout-causal {
-        background: linear-gradient(90deg, rgba(139, 92, 246, 0.10) 0%, rgba(99, 102, 241, 0.04) 100%);
-        border-left: 4px solid #8b5cf6;
-        border-top: 1px solid rgba(139, 92, 246, 0.2);
-        border-right: 1px solid rgba(139, 92, 246, 0.12);
-        border-bottom: 1px solid rgba(139, 92, 246, 0.12);
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border-left: 4px solid #b45309;
+        border-top: 1px solid rgba(180, 83, 9, 0.25);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .callout-causal strong {
-        color: #a78bfa;
+        color: #fbbf24;
     }
 
     /* Small Sample Flag Banner */
     .small-sample-warning {
-        background: rgba(245, 158, 11, 0.10);
-        border: 1px solid rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.12);
+        border: 1px solid rgba(245, 158, 11, 0.35);
         border-radius: 8px;
         padding: 0.75rem 1rem;
         margin: 0.75rem 0;
@@ -413,7 +419,7 @@ def apply_custom_theme() -> None:
         line-height: 1.45;
     }
     .small-sample-warning strong {
-        color: #f59e0b;
+        color: #fbbf24;
     }
 
     /* Badge Tags */
@@ -441,14 +447,14 @@ def apply_custom_theme() -> None:
         border: 1px solid rgba(244, 63, 94, 0.35);
     }
     .badge-info {
-        background: rgba(217, 119, 6, 0.15);
-        color: #f59e0b;
-        border: 1px solid rgba(217, 119, 6, 0.35);
+        background: rgba(245, 158, 11, 0.16);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.35);
     }
     .badge-navy {
-        background: rgba(37, 99, 235, 0.15);
-        color: #60a5fa;
-        border: 1px solid rgba(37, 99, 235, 0.35);
+        background: rgba(245, 158, 11, 0.16);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.35);
     }
 
     /* Sidebar Branding with Bespoke SVG */
@@ -727,8 +733,8 @@ def render_headline_callout(
     stat_html = ""
     if stat_value and stat_label:
         stat_html = (
-            f'<div style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; padding: 0.75rem 1.25rem; text-align: center; min-width: 140px;">'
-            f'<div style="font-family: var(--eb-font-heading); font-size: 1.6rem; font-weight: 800; color: #818cf8; line-height: 1.1;">{stat_value}</div>'
+            f'<div style="background: rgba(245, 158, 11, 0.16); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 0.75rem 1.25rem; text-align: center; min-width: 140px;">'
+            f'<div style="font-family: var(--eb-font-heading); font-size: 1.6rem; font-weight: 800; color: #fbbf24; line-height: 1.1;">{stat_value}</div>'
             f'<div style="font-size: 0.725rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--eb-text-label); margin-top: 0.2rem;">{stat_label}</div>'
             f'</div>'
         )
@@ -823,17 +829,18 @@ def style_plotly_figure(
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(
             family="Inter, -apple-system, BlinkMacSystemFont, sans-serif",
-            color="#94a3b8",
+            color="#d4d4d8",
             size=12
         ),
         showlegend=show_legend,
         height=height,
         margin=dict(t=35 if title else 20, b=30, l=35, r=25),
         hoverlabel=dict(
-            bgcolor="rgba(15, 23, 42, 0.95)",
+            bgcolor="rgba(22, 22, 24, 0.96)",
             font_size=12,
             font_family="Inter, sans-serif",
-            bordercolor="rgba(255, 255, 255, 0.15)"
+            bordercolor="rgba(245, 158, 11, 0.4)",
+            font=dict(color="#f5f5f5")
         )
     )
 
@@ -844,7 +851,7 @@ def style_plotly_figure(
                 font=dict(
                     family="Outfit, sans-serif",
                     size=14,
-                    color="#cbd5e1"
+                    color="#f5f5f5"
                 ),
                 x=0.01,
                 xanchor="left"
@@ -856,14 +863,14 @@ def style_plotly_figure(
         title=xaxis_title,
         showgrid=False,
         zeroline=False,
-        tickfont=dict(size=11, color="#94a3b8")
+        tickfont=dict(size=11, color="#a1a1aa")
     )
     fig.update_yaxes(
         title=yaxis_title,
         showgrid=True,
-        gridcolor="rgba(148, 163, 184, 0.12)",
+        gridcolor="rgba(255, 255, 255, 0.10)",
         zeroline=False,
-        tickfont=dict(size=11, color="#94a3b8")
+        tickfont=dict(size=11, color="#a1a1aa")
     )
 
     return fig

@@ -224,8 +224,8 @@ with col_chart2:
     age_plot_df = age_summary.copy()
     age_plot_df["rate_pct"] = age_plot_df["churn_rate"] * 100
     
-    # Highlight 46-59 cohort with risk color, others with primary indigo
-    bar_colors = [COLOR_EXITED if seg == "46-59" else COLOR_PRIMARY for seg in age_plot_df["segment"]]
+    # Highlight 46-59 cohort with risk color, others with neutral zinc
+    bar_colors = [COLOR_EXITED if seg == "46-59" else COLOR_NEUTRAL for seg in age_plot_df["segment"]]
     
     fig_age = go.Figure()
     fig_age.add_trace(go.Bar(

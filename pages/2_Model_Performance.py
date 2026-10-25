@@ -36,7 +36,8 @@ from src.ui_theme import (
     COLOR_RETAINED,
     COLOR_EXITED,
     COLOR_WARNING,
-    COLOR_NEUTRAL
+    COLOR_NEUTRAL,
+    COLOR_NEUTRAL_LIGHT
 )
 
 st.set_page_config(
@@ -144,7 +145,7 @@ with col_cv_table:
 
 with col_cv_rationale:
     st.markdown(f"""
-    <div class="content-card" style="border-left: 4px solid {COLOR_RETAINED};">
+    <div class="content-card" style="border-left: 4px solid {COLOR_PRIMARY};">
         <div class="content-card-title">🎯 Model Selection Rationale</div>
         <div style="font-size: 0.875rem; color: var(--eb-text-title); line-height: 1.5; margin-bottom: 0.6rem;">
             {selection_rationale}
@@ -218,7 +219,7 @@ col_th1, col_th2 = st.columns(2)
 
 with col_th1:
     st.markdown(f"""
-    <div class="content-card" style="border-top: 4px solid {COLOR_PRIMARY}; height: 100%;">
+    <div class="content-card" style="border-top: 4px solid {COLOR_NEUTRAL}; height: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
             <div style="font-family: var(--eb-font-heading); font-size: 1.15rem; font-weight: 800; color: var(--eb-text-title);">
                 Default Threshold: {m05['threshold']:.2f}
@@ -231,12 +232,12 @@ with col_th1:
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
             <div style="background: var(--eb-bg-card-subtle); padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--eb-border-card);">
                 <div style="font-size: 0.7rem; color: var(--eb-text-label); text-transform: uppercase;">Precision</div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_RETAINED};">{m05['precision']:.1%}</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_PRIMARY};">{m05['precision']:.1%}</div>
                 <div style="font-size: 0.7rem; color: var(--eb-text-subtle);">Nearly 3 of 4 flags correct</div>
             </div>
             <div style="background: var(--eb-bg-card-subtle); padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--eb-border-card);">
                 <div style="font-size: 0.7rem; color: var(--eb-text-label); text-transform: uppercase;">Recall (Detection)</div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_WARNING};">{m05['recall']:.1%}</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_NEUTRAL_LIGHT};">{m05['recall']:.1%}</div>
                 <div style="font-size: 0.7rem; color: var(--eb-text-subtle);">Catches {cm5['TP']:,} of {total_test_exited:,} churners</div>
             </div>
         </div>
@@ -251,7 +252,7 @@ with col_th1:
 
 with col_th2:
     st.markdown(f"""
-    <div class="content-card" style="border-top: 4px solid {COLOR_WARNING}; height: 100%;">
+    <div class="content-card" style="border-top: 4px solid {COLOR_PRIMARY}; height: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
             <div style="font-family: var(--eb-font-heading); font-size: 1.15rem; font-weight: 800; color: var(--eb-text-title);">
                 CV-Alternative Threshold: {malt['threshold']:.2f}
@@ -264,12 +265,12 @@ with col_th2:
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
             <div style="background: var(--eb-bg-card-subtle); padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--eb-border-card);">
                 <div style="font-size: 0.7rem; color: var(--eb-text-label); text-transform: uppercase;">Precision</div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_WARNING};">{malt['precision']:.1%}</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_NEUTRAL_LIGHT};">{malt['precision']:.1%}</div>
                 <div style="font-size: 0.7rem; color: var(--eb-text-subtle);">Moderate false positive rate</div>
             </div>
             <div style="background: var(--eb-bg-card-subtle); padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--eb-border-card);">
                 <div style="font-size: 0.7rem; color: var(--eb-text-label); text-transform: uppercase;">Recall (Detection)</div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_RETAINED};">{malt['recall']:.1%}</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: {COLOR_PRIMARY};">{malt['recall']:.1%}</div>
                 <div style="font-size: 0.7rem; color: var(--eb-text-subtle);">Catches {cm_alt['TP']:,} of {total_test_exited:,} churners (+{cm_alt['TP'] - cm5['TP']:,})</div>
             </div>
         </div>
